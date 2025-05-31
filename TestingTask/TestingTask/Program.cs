@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TestingTask.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var conn = builder.Configuration.GetConnectionString("Default");
+builder.Services.AddDbContext<AppDbContext>(option =>
+{
+    option.UseSqlServer(conn);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

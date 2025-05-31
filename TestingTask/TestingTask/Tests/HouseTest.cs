@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-
 using TestingTask.Data;
 using TestingTask.Models;
 using TestingTask.Repositories;
@@ -31,8 +30,8 @@ namespace TestingTask.Tests
             var house = new House { Title = "Test House", Description = "Nice", Price = 100 };
             var result = await _service.AddAsync(house);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Test House", result.Title);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Title, Is.EqualTo("Test House"));
         }
 
         [Test]
@@ -43,7 +42,7 @@ namespace TestingTask.Tests
 
             var result = await _service.GetAllAsync();
 
-            Assert.AreEqual(2, result.Count);
+            Assert.That(result.Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -54,7 +53,7 @@ namespace TestingTask.Tests
 
             var updated = await _service.UpdateAsync(house);
 
-            Assert.AreEqual("Updated", updated.Title);
+            Assert.That(updated.Title, Is.EqualTo("Updated"));
         }
 
         [Test]
@@ -63,7 +62,7 @@ namespace TestingTask.Tests
             var house = await _service.AddAsync(new House { Title = "ToDelete", Description = "Test", Price = 60 });
             var deleted = await _service.DeleteAsync(house.Id);
 
-            Assert.IsTrue(deleted);
+            Assert.That(deleted, Is.True);
         }
     }
 }
