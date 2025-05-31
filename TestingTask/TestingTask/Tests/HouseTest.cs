@@ -42,8 +42,10 @@ namespace TestingTask.Tests
 
             var result = await _service.GetAllAsync();
 
+            Assert.That(result, Is.Not.Null);
             Assert.That(result.Count, Is.EqualTo(2));
         }
+
 
         [Test]
         public async Task UpdateAsync_ShouldUpdateHouse()
