@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app1:
+   image: volumetask:dev
+   build:
+    context: .
+    dockerfile: VolumeTask/Dockerfile
+   ports:
+    - "5001:8080"
+   volumes:
+      - errors:/Error
+      - info:/Info
+   environment:
+    - ASPNETCORE_ENVIRONMENT=Development 
+
+volumes:
+  errors:
+    external: true
+  info:
+    external: true
